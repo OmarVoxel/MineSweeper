@@ -13,5 +13,11 @@ namespace MineSweeper.Tests
             cell.Value.Should().Be('.');
         }
 
+        [Fact]
+        public void CellContainsAAstheric()
+        {
+            Cell cell = new Cell('*');
+            cell.Value.Should().Be('*');
+        }
     }
 }
