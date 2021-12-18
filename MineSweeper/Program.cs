@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace MineSweeper
+﻿namespace MineSweeper
 {
     class Program
     {

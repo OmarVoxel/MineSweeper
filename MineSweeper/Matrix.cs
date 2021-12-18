@@ -1,6 +1,4 @@
-﻿using System.Runtime.Intrinsics.X86;
-
-namespace MineSweeper
+﻿namespace MineSweeper
 {
     public struct Coordinate
     {
@@ -13,8 +11,8 @@ namespace MineSweeper
 
     public class Matrix
     {
-        private Coordinate _coordinate;
-        private Cell[,] _matrix;
+        private readonly Coordinate _coordinate;
+        private readonly Cell[,] _matrix;
         private const char InitValue = '.';
 
         public Matrix(Coordinate coordinate)

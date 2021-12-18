@@ -5,7 +5,6 @@ namespace MineSweeper.Tests
 {
     public class CellTests
     {
-
         [Fact]
         public void CellContainsADot()
         {
