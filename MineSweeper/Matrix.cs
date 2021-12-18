@@ -11,27 +11,34 @@
 
     public class Matrix
     {
-        private readonly Coordinate _coordinate;
+        private readonly int _M, _N;
         private readonly Cell[,] _matrix;
         private const char InitValue = '.';
 
-        public Matrix(Coordinate coordinate)
+        public Matrix(int m,  int n)
         {
-            _coordinate = coordinate;
-            _matrix = new Cell[coordinate.X, coordinate.Y];
+            (_M, _N) = (m, n);
+            _matrix = new Cell[m, n];
             Initialize();
         }
 
         private void Initialize()
         { 
-            for (int m = 0; m < _coordinate.X; m++)
-                for (int n = 0; n < _coordinate.Y; n++)
+            for (int m = 0; m < _M; m++)
+                for (int n = 0; n < _N; n++)
                     _matrix[m, n] = new Cell(InitValue);
         }
 
         public Cell At(Coordinate coordinate) 
             => _matrix[coordinate.X, coordinate.Y];
         
-
+        // Possible setter? 
+        public void SetMine(Coordinate coordinate)
+        { 
+            // Se esta cambiando el valor de un struct que supuestamente es inmutable????
+            //_matrix[coordinate.X, coordinate.Y].Value =  '*';
+            // Mejor approach?
+            _matrix[coordinate.X, coordinate.Y] = new Cell('*');
+        }
     }
 }
