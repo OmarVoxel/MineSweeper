@@ -1,7 +1,8 @@
 ﻿namespace MineSweeper
 {
-    public class Cell
+    public struct Cell
     {
-        
+        public char Value;
+        public Cell(char symbol) => Value = symbol;
     }
 }
