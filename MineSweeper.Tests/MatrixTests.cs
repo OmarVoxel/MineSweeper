@@ -38,8 +38,7 @@ namespace MineSweeper.Tests
         public void MatrixCanBeOpen()
         {
             Matrix m1 = new(4, 4);
-            m1.Open(1, 1).Should().Be('.');
-
+            m1.Open(new (1,1)).Value.Should().Be('.');
         }
 
     }

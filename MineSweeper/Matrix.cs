@@ -29,6 +29,9 @@ namespace MineSweeper
         
         public void SetMine(Coordinate coordinate) 
             => _matrix[coordinate.X, coordinate.Y] = new Cell('*');
+        
+        public Cell Open(Coordinate coordinate)
+            => _matrix[coordinate.X, coordinate.Y];
 
         private string CellsAsString()
             => string.Concat(_matrix.OfType<Cell>().Select(c => c.Value));
@@ -38,5 +41,7 @@ namespace MineSweeper
         
         public override int GetHashCode()
             => this.CellsAsString().GetHashCode();
+
+
     }
 }
