@@ -4,26 +4,30 @@ namespace MineSweeper
 {
     public record Coordinate (int X, int Y);
 
+    public record Size(int M, int N);
+
     public class Matrix
     {
-        private readonly int _M, _N;
+        private readonly Size _size;
         private readonly Cell[,] _matrix;
         private const char InitValue = '.';
 
-        public Matrix(int m,  int n)
+        public Matrix(Size size)
         {
-            (_M, _N) = (m, n);
-            _matrix = new Cell[m, n];
+            _size = size;
+            _matrix = new Cell[size.M, size.N];
             Initialize();
         }
 
         private void Initialize()
         { 
-            for (int m = 0; m < _M; m++)
-                for (int n = 0; n < _N; n++)
+            for (int m = 0; m < _size.M; m++)
+                for (int n = 0; n < _size.N; n++)
                     _matrix[m, n] = new Cell(InitValue);
         }
 
+        public Size GetSize()
+            => _size;
         public Cell At(Coordinate coordinate) 
             => _matrix[coordinate.X, coordinate.Y];
         
