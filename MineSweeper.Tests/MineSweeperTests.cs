@@ -67,5 +67,34 @@ namespace MineSweeper.Tests
             
             mineSweeper.PrintMatrix().Should().Be(printExpected);
         }
+        
+        public void PlayerWinIfCanNotOpenNoMoreCells()
+        {
+            Matrix matrix = new Matrix(new(4, 4));
+            
+            matrix.SetMine(new(0,1));
+            matrix.SetMine(new(0,2));
+            matrix.SetMine(new(0,3));
+            
+            matrix.SetMine(new(1,0));
+            matrix.SetMine(new(1,1));
+            matrix.SetMine(new(1,2));
+            matrix.SetMine(new(1,3));
+            
+            matrix.SetMine(new(2,0));
+            matrix.SetMine(new(2,1));
+            matrix.SetMine(new(2,2));
+            matrix.SetMine(new(2,3));
+            
+            matrix.SetMine(new(3,0));
+            matrix.SetMine(new(3,1));
+            matrix.SetMine(new(3,2));
+            matrix.SetMine(new(3,3));
+            
+            MineSweeper mineSweeper = new(matrix, 2);
+            mineSweeper.Open(new(0, 0));
+            mineSweeper.HasWin.Should().Be(true);
+        }
+        
     }
 }

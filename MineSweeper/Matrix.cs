@@ -3,7 +3,6 @@
 namespace MineSweeper
 {
     public record Coordinate (int X, int Y);
-
     public record Size(int M, int N);
 
     public class Matrix

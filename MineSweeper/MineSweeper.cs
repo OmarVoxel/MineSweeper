@@ -6,6 +6,7 @@ namespace MineSweeper
     public class MineSweeper
     {
         public bool HasLose { get; private set; }
+
         private readonly int _numMines;
         private readonly Matrix _matrix;
         private readonly Matrix _showedMatrix;
