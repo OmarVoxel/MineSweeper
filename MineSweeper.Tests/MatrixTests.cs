@@ -8,16 +8,39 @@ namespace MineSweeper.Tests
         [Fact]
         public void MatrixAtZeroZeroHasADot()
         {
-            Matrix matrix = new Matrix(4,4);
-            matrix.At(new Coordinate(0,0)).Value.Should().Be('.');
+            Matrix matrix = new Matrix(4, 4);
+            matrix.At(new Coordinate(0, 0)).Value.Should().Be('.');
         }
-        
+
         [Fact]
         public void SetAMineInThePositionZeroZero()
         {
-            Matrix matrix = new Matrix(4,4);
+            Matrix matrix = new Matrix(4, 4);
             matrix.SetMine(new Coordinate(0, 0));
-            matrix.At(new Coordinate(0,0)).Value.Should().Be('*');
+            matrix.At(new Coordinate(0, 0)).Value.Should().Be('*');
         }
+
+        [Fact]
+        public void MatrixIsntTheSameAfterSetAMine()
+        {
+            Matrix m1 = new(4, 4);
+            m1.SetMine(new(1, 1));
+            Matrix m2 = new(4, 4);
+            m2.SetMine(new(1, 1));
+            Matrix xx = new(4, 4);
+            xx.SetMine(new(2, 2));
+
+            m2.Should().Be(m1);
+            xx.Should().NotBe(m1);
+        }
+
+        [Fact]
+        public void MatrixCanBeOpen()
+        {
+            Matrix m1 = new(4, 4);
+            m1.Open(1, 1).Should().Be('.');
+
+        }
+
     }
 }

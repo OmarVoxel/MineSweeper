@@ -29,7 +29,7 @@ namespace MineSweeper
         
         public void SetMine(Coordinate coordinate) 
             => _matrix[coordinate.X, coordinate.Y] = new Cell('*');
-        
+
         private string CellsAsString()
             => string.Concat(_matrix.OfType<Cell>().Select(c => c.Value));
         
