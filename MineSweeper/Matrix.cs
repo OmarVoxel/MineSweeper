@@ -45,7 +45,5 @@ namespace MineSweeper
         
         public override int GetHashCode()
             => this.CellsAsString().GetHashCode();
-
-
     }
 }

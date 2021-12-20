@@ -16,5 +16,16 @@ namespace MineSweeper.Tests
             mineSweeper.Open(new(1, 1));
             mineSweeper.HasLose.Should().Be(true);
         }
+        
+        [Fact]
+        public void PlayerDoNotLoseIfTheValueOfCellIsNotAMine()
+        {
+            Matrix matrix = new Matrix(new(4, 4));
+            matrix.SetMine(new(1,1));
+            
+            MineSweeper mineSweeper = new(matrix, 2);
+            mineSweeper.Open(new(1, 0));
+            mineSweeper.HasLose.Should().Be(false);
+        }
     }
 }

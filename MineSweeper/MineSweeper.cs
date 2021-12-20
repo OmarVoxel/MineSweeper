@@ -23,7 +23,10 @@ namespace MineSweeper
             Random rnd = new Random();
 
             while (minesSet.Count != _numMines)
-                minesSet.Add(new Coordinate(rnd.Next(0, _size.M), rnd.Next(0, _size.N)));
+                minesSet.Add(new Coordinate(
+                    rnd.Next(0, _size.M), 
+                    rnd.Next(0, _size.N))
+                );
 
             foreach (Coordinate coordinate in minesSet)
                 _matrix.SetMine(coordinate);
