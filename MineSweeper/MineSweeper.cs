@@ -41,7 +41,14 @@ namespace MineSweeper
             if (_matrix.At(coordinate).Value == '*')
                 HasLose = true;
 
-            _showedMatrix.ChangeValue(coordinate, '1');
+            int count = 0;
+            for (int x = 0; x < _size.M - 1; x++)
+                for (int y = 0; y < _size.N - 1; y++)
+                    if (x >= 0 && y >= 0 && x < _size.M && y < _size.N)
+                        if(_matrix.At(new Coordinate(x, y)).Value == '*')
+                            count++;
+                    
+            _showedMatrix.ChangeValue(coordinate, char.Parse(count.ToString()));
         }
 
         public String PrintMatrix()
