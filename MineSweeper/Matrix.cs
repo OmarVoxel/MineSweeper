@@ -33,6 +33,9 @@ namespace MineSweeper
         
         public void SetMine(Coordinate coordinate) 
             => _matrix[coordinate.X, coordinate.Y] = new Cell('*');
+
+        public void ChangeValue(Coordinate coordinate, char value)
+            => _matrix[coordinate.X, coordinate.Y] = new Cell(value);
         
         public Cell Open(Coordinate coordinate)
             => _matrix[coordinate.X, coordinate.Y];

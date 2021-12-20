@@ -29,12 +29,26 @@ namespace MineSweeper.Tests
         }
 
         [Fact]
-        public void WhenMatrixIsPrintedShouldShowTheFollowString()
+        public void WhenMatrixIsPrintedShouldShowTheFollowingString()
         {
             string printExpected = "....\n....\n....\n....\n";
 
             Matrix matrix = new Matrix(new(4, 4));
             MineSweeper mineSweeper = new(matrix, 2);
+            
+            mineSweeper.PrintMatrix().Should().Be(printExpected);
+        }
+        
+        [Fact]
+        public void CellIsOpenWithoutAMineButWithAMineAdjacent()
+        {
+            string printExpected = "1...\n....\n....\n....\n";
+
+            Matrix matrix = new Matrix(new(4, 4));
+            matrix.SetMine(new(0,1));
+            
+            MineSweeper mineSweeper = new(matrix, 2);
+            mineSweeper.Open(new(0,0));
             
             mineSweeper.PrintMatrix().Should().Be(printExpected);
         }

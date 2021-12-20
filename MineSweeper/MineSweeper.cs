@@ -40,16 +40,18 @@ namespace MineSweeper
         {
             if (_matrix.At(coordinate).Value == '*')
                 HasLose = true;
+
+            _showedMatrix.ChangeValue(coordinate, '1');
         }
 
         public String PrintMatrix()
         {
             string temp = "";
-            for (int i = 0; i < _size.M; i++)
+            for (int x = 0; x < _size.M; x++)
             {
-                for (int j = 0; j < _size.N; j++)
+                for (int y = 0; y < _size.N; y++)
                 {
-                    temp += _showedMatrix.At(new Coordinate(i, j)).Value;
+                    temp += _showedMatrix.At(new Coordinate(x, y)).Value;
                 }
                 temp += '\n';
             }
