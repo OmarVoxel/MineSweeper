@@ -29,7 +29,7 @@ namespace MineSweeper.Tests
         }
 
         [Fact]
-        public void PrintingTheMatrixReturnTheSameHarcodedList()
+        public void WhenMatrixIsPrintedShouldShowTheFollowString()
         {
             string printExpected = "....\n....\n....\n....\n....";
 
