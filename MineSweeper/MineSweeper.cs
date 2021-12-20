@@ -8,12 +8,16 @@ namespace MineSweeper
         public bool HasLose { get; private set; }
         private readonly int _numMines;
         private readonly Matrix _matrix;
+        private readonly Matrix _showedMatrix;
         private readonly Size _size;
 
         public MineSweeper(Matrix matrix, int numMines)
         {
             (_matrix, _numMines) = (matrix, numMines);
+            
             _size = _matrix.GetSize();
+            _showedMatrix = new Matrix(new(_size.M, _size.N));
+            
             SetMines();
         }
         
@@ -38,9 +42,19 @@ namespace MineSweeper
                 HasLose = true;
         }
 
-        public Matrix PrintMatrix()
+        public String PrintMatrix()
         {
-            throw new Exception();
+            string temp = "";
+            for (int i = 0; i < _size.M; i++)
+            {
+                for (int j = 0; j < _size.N; j++)
+                {
+                    temp += _showedMatrix.At(new Coordinate(i, j)).Value;
+                }
+                temp += '\n';
+            }
+
+            return temp;
         }
     }
 }

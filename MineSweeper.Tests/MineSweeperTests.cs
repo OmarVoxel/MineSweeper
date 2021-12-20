@@ -31,7 +31,7 @@ namespace MineSweeper.Tests
         [Fact]
         public void WhenMatrixIsPrintedShouldShowTheFollowString()
         {
-            string printExpected = "....\n....\n....\n....\n....";
+            string printExpected = "....\n....\n....\n....\n";
 
             Matrix matrix = new Matrix(new(4, 4));
             MineSweeper mineSweeper = new(matrix, 2);
