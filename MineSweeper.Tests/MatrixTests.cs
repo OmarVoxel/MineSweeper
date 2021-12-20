@@ -35,10 +35,18 @@ namespace MineSweeper.Tests
         }
 
         [Fact]
-        public void MatrixCanBeOpen()
+        public void CellHasADotInTheCoordenateOneOne()
         {
             Matrix m1 = new(4, 4);
             m1.Open(new (1,1)).Value.Should().Be('.');
+        }
+        
+        [Fact]
+        public void CellHasAnAstherictInTheCoordenateOneOne()
+        {
+            Matrix m1 = new(4, 4);
+            m1.SetMine(new(1,1));
+            m1.Open(new (1,1)).Value.Should().Be('*');
         }
 
     }
