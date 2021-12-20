@@ -25,6 +25,6 @@ namespace MineSweeper
 
             foreach (Coordinate coordinate in minesSet)
                 _matrix.SetMine(coordinate);
-        } 
+        }
     }
 }
