@@ -39,6 +39,9 @@ namespace MineSweeper.Tests
                 {  new Cell(','), new Cell(','), new Cell(','), new Cell(',') }  
             };
 
+            Matrix matrix = new Matrix(new(4, 4));
+            MineSweeper mineSweeper = new(matrix, 2);
+            
             mineSweeper.GetMatrix().Should().Be(harcodedList);
         }
     }
