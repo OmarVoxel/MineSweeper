@@ -27,5 +27,19 @@ namespace MineSweeper.Tests
             mineSweeper.Open(new(1, 0));
             mineSweeper.HasLose.Should().Be(false);
         }
+
+        [Fact]
+        public void PrintingTheMatrixReturnTheSameHarcodedList()
+        {
+            Cell[,] harcodedList = new Cell[4,4]
+            {
+                {  new Cell(','), new Cell(','), new Cell(','), new Cell(',') },
+                {  new Cell(','), new Cell(','), new Cell(','), new Cell(',') },
+                {  new Cell(','), new Cell(','), new Cell(','), new Cell(','), },
+                {  new Cell(','), new Cell(','), new Cell(','), new Cell(',') }  
+            };
+
+            mineSweeper.GetMatrix().Should().Be(harcodedList);
+        }
     }
 }
