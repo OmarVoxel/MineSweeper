@@ -31,18 +31,12 @@ namespace MineSweeper.Tests
         [Fact]
         public void PrintingTheMatrixReturnTheSameHarcodedList()
         {
-            Cell[,] harcodedList = new Cell[4,4]
-            {
-                {  new Cell(','), new Cell(','), new Cell(','), new Cell(',') },
-                {  new Cell(','), new Cell(','), new Cell(','), new Cell(',') },
-                {  new Cell(','), new Cell(','), new Cell(','), new Cell(','), },
-                {  new Cell(','), new Cell(','), new Cell(','), new Cell(',') }  
-            };
+            string printExpected = "....\n....\n....\n....\n....";
 
             Matrix matrix = new Matrix(new(4, 4));
             MineSweeper mineSweeper = new(matrix, 2);
             
-            mineSweeper.GetMatrix().Should().Be(harcodedList);
+            mineSweeper.PrintMatrix().Should().Be(printExpected);
         }
     }
 }

@@ -37,5 +37,10 @@ namespace MineSweeper
             if (_matrix.At(coordinate).Value == '*')
                 HasLose = true;
         }
+
+        public Matrix PrintMatrix()
+        {
+            throw new Exception();
+        }
     }
 }
