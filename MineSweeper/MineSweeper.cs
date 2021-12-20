@@ -12,7 +12,7 @@ namespace MineSweeper
         {
             (_m, _n, _numMines) = (m, n, numMines);
             Matrix = new Matrix(m, n);
-            //SetMines();
+            SetMines();
         }
 
         private void SetMines()
