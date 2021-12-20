@@ -1,14 +1,9 @@
-﻿namespace MineSweeper
+﻿using System.Linq;
+
+namespace MineSweeper
 {
-    public struct Coordinate
-    {
-        public int X;
-        public int Y;
-
-        public Coordinate(int x, int y)
-            => (X, Y) = (x, y);
-    }
-
+    public record Coordinate (int X, int Y);
+    
     public class Matrix
     {
         private readonly int _M, _N;
@@ -32,13 +27,16 @@
         public Cell At(Coordinate coordinate) 
             => _matrix[coordinate.X, coordinate.Y];
         
-        // Possible setter? 
-        public void SetMine(Coordinate coordinate)
-        { 
-            // Se esta cambiando el valor de un struct que supuestamente es inmutable????
-            //_matrix[coordinate.X, coordinate.Y].Value =  '*';
-            // Mejor approach?
-            _matrix[coordinate.X, coordinate.Y] = new Cell('*');
-        }
+        public void SetMine(Coordinate coordinate) 
+            => _matrix[coordinate.X, coordinate.Y] = new Cell('*');
+        
+        private string CellsAsString()
+            => string.Concat(_matrix.OfType<Cell>().Select(c => c.Value));
+        
+        public override bool Equals(object other)
+            => this.CellsAsString().Equals((other as Matrix)?.CellsAsString());
+        
+        public override int GetHashCode()
+            => this.CellsAsString().GetHashCode();
     }
 }
