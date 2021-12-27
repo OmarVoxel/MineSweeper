@@ -9,7 +9,7 @@ namespace MineSweeper.Tests
         [Fact]
         public void PlayerLoseIfTheValueOfCellIsAMine()
         {
-            Matrix matrix = new Matrix(new(4, 4));
+            Matrix matrix = new Matrix(4, 4);
             matrix.SetMine(new(1,1));
             
             MineSweeper mineSweeper = new(matrix, 2);
@@ -20,7 +20,7 @@ namespace MineSweeper.Tests
         [Fact]
         public void PlayerDoNotLoseIfTheValueOfCellIsNotAMine()
         {
-            Matrix matrix = new Matrix(new(4, 4));
+            Matrix matrix = new Matrix(4, 4);
             matrix.SetMine(new(1,1));
             
             MineSweeper mineSweeper = new(matrix, 2);
@@ -33,7 +33,7 @@ namespace MineSweeper.Tests
         {
             string printExpected = "....\n....\n....\n....\n";
 
-            Matrix matrix = new Matrix(new(4, 4));
+            Matrix matrix = new Matrix(4, 4);
             MineSweeper mineSweeper = new(matrix, 2);
             
             mineSweeper.PrintMatrix().Should().Be(printExpected);
@@ -44,7 +44,7 @@ namespace MineSweeper.Tests
         {
             string printExpected = "1...\n....\n....\n....\n";
 
-            Matrix matrix = new Matrix(new(4, 4));
+            Matrix matrix = new Matrix(4, 4);
             matrix.SetMine(new(0,1));
             
             MineSweeper mineSweeper = new(matrix, 2);
@@ -56,9 +56,9 @@ namespace MineSweeper.Tests
         [Fact]
         public void CellIsOpenWithoutAMineButWithTwoMineAdjacent()
         {
-            string printExpected = "2...\n....\n....\n....\n";
+            string printExpected = "2..\n...\n...\n";
 
-            Matrix matrix = new Matrix(new(4, 4));
+            Matrix matrix = new Matrix(3,3);
             matrix.SetMine(new(0,1));
             matrix.SetMine(new(1,0));
             
@@ -68,31 +68,26 @@ namespace MineSweeper.Tests
             mineSweeper.PrintMatrix().Should().Be(printExpected);
         }
         
+        [Fact]
         public void PlayerWinIfCanNotOpenNoMoreCells()
         {
-            Matrix matrix = new Matrix(new(4, 4));
+            Matrix matrix = new Matrix(3, 3);
             
             matrix.SetMine(new(0,1));
             matrix.SetMine(new(0,2));
-            matrix.SetMine(new(0,3));
-            
+
             matrix.SetMine(new(1,0));
             matrix.SetMine(new(1,1));
             matrix.SetMine(new(1,2));
-            matrix.SetMine(new(1,3));
-            
+
             matrix.SetMine(new(2,0));
             matrix.SetMine(new(2,1));
             matrix.SetMine(new(2,2));
-            matrix.SetMine(new(2,3));
-            
-            matrix.SetMine(new(3,0));
-            matrix.SetMine(new(3,1));
-            matrix.SetMine(new(3,2));
-            matrix.SetMine(new(3,3));
-            
+
             MineSweeper mineSweeper = new(matrix, 2);
             mineSweeper.Open(new(0, 0));
+            
+            mineSweeper.HasWin.Should().Be(true);
             mineSweeper.HasWin.Should().Be(true);
         }
         

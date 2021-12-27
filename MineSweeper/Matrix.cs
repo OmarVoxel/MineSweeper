@@ -1,34 +1,50 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace MineSweeper
 {
     public record Coordinate (int X, int Y);
-    public record Size(int M, int N);
 
     public class Matrix
     {
-        private readonly Size _size;
         private readonly Cell[,] _matrix;
         private const char InitValue = '.';
+        
+        public int Width {  get;  set; }
+        public int Height { get; }
 
-        public Matrix(Size size)
+        public Matrix(int width, int height)
         {
-            _size = size;
-            _matrix = new Cell[size.M, size.N];
+            (Width, Height) = (width, height);
+            
+            _matrix = new Cell[width, height];
             Initialize();
         }
 
         private void Initialize()
         { 
-            for (int m = 0; m < _size.M; m++)
-                for (int n = 0; n < _size.N; n++)
+            for (int m = 0; m < Width; m++)
+                for (int n = 0; n < Height; n++)
                     _matrix[m, n] = new Cell(InitValue);
         }
 
-        public Size GetSize()
-            => _size;
         public Cell At(Coordinate coordinate) 
             => _matrix[coordinate.X, coordinate.Y];
+        
+        public IEnumerable<Cell> NeighborsOf(Coordinate coord)
+        {
+            for (int x = Math.Max(coord.X - 1, 0); x <= Math.Min(coord.X + 1, Width - 1); x++)
+            {
+                for (int y = Math.Max(coord.Y - 1, 0); y <= Math.Min(coord.Y + 1, Height - 1); y++)
+                {
+                    if ((x,y) == (coord.X, coord.Y)) continue;
+
+                    yield return At(new Coordinate(x, y));
+                }
+            }
+        }
         
         public void SetMine(Coordinate coordinate) 
             => _matrix[coordinate.X, coordinate.Y] = new Cell('*');
@@ -39,6 +55,9 @@ namespace MineSweeper
         public Cell Open(Coordinate coordinate)
             => _matrix[coordinate.X, coordinate.Y];
 
+        public IEnumerable ToList()
+            => _matrix.Cast<Cell>().ToList();
+
         private string CellsAsString()
             => string.Concat(_matrix.OfType<Cell>().Select(c => c.Value));
         
@@ -47,5 +66,6 @@ namespace MineSweeper
         
         public override int GetHashCode()
             => this.CellsAsString().GetHashCode();
+
     }
 }

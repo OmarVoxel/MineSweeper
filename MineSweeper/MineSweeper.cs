@@ -1,27 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace MineSweeper
 {
     public class MineSweeper
     {
         public bool HasLose { get; private set; }
+        public bool HasWin { get; private set; }
 
         private readonly int _numMines;
         private readonly Matrix _matrix;
         private readonly Matrix _showedMatrix;
-        private readonly Size _size;
 
         public MineSweeper(Matrix matrix, int numMines)
         {
             (_matrix, _numMines) = (matrix, numMines);
             
-            _size = _matrix.GetSize();
-            _showedMatrix = new Matrix(new(_size.M, _size.N));
-            
+            _showedMatrix = new Matrix(_matrix.Width, _matrix.Height);
             SetMines();
         }
         
+
         private void SetMines()
         {
             HashSet<Coordinate> minesSet = new HashSet<Coordinate>();
@@ -29,8 +29,8 @@ namespace MineSweeper
 
             while (minesSet.Count != _numMines)
                 minesSet.Add(new Coordinate(
-                    rnd.Next(0, _size.M), 
-                    rnd.Next(0, _size.N))
+                    rnd.Next(0, _matrix.Width), 
+                    rnd.Next(0, _matrix.Height))
                 );
 
             foreach (Coordinate coordinate in minesSet)
@@ -42,24 +42,36 @@ namespace MineSweeper
             if (_matrix.At(coordinate).Value == '*')
                 HasLose = true;
 
-            int count = 0;
-            for (int x = 0; x < _size.M - 1; x++)
-                for (int y = 0; y < _size.N - 1; y++)
-                    if (x >= 0 && y >= 0 && x < _size.M && y < _size.N)
-                        if(_matrix.At(new Coordinate(x, y)).Value == '*')
-                            count++;
-                    
-            _showedMatrix.ChangeValue(coordinate, char.Parse(count.ToString()));
+            UpdateMatrix(coordinate);
+            HasWin = PlayerHasWin();
+        }
+
+        private void UpdateMatrix(Coordinate coordinate)
+        {
+            int numOfMines = _matrix.NeighborsOf(coordinate).Count(cell => cell.Value == '*');
+            _matrix.ChangeValue(coordinate, char.Parse(numOfMines.ToString()));
+        }
+
+        private bool PlayerHasWin()
+        {
+            for (int x = 0; x < _matrix.Width -1; x++)
+                for (int y = 0; y < _matrix.Height -1; y++)
+                    if (_matrix.At(new(x,y)).Value == '.')
+                        return false;
+
+            return true;
         }
 
         public String PrintMatrix()
         {
             string temp = "";
-            for (int x = 0; x < _size.M; x++)
+            for (int x = 0; x < _matrix.Width; x++)
             {
-                for (int y = 0; y < _size.N; y++)
+                for (int y = 0; y < _matrix.Height; y++)
                 {
-                    temp += _showedMatrix.At(new Coordinate(x, y)).Value;
+                    temp += _matrix.At(new Coordinate(x, y)).Value == '*' 
+                        ? '.' 
+                        : _matrix.At(new Coordinate(x, y)).Value;
                 }
                 temp += '\n';
             }
