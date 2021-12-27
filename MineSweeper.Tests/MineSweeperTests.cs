@@ -88,8 +88,8 @@ namespace MineSweeper.Tests
             mineSweeper.Open(new(0, 0));
             
             mineSweeper.HasWin.Should().Be(true);
-            mineSweeper.HasWin.Should().Be(true);
         }
+        
         
     }
 }
